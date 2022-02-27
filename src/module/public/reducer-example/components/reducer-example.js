@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Header, Input, Segment, Form, Button } from "semantic-ui-react";
-import { AppContext } from '../../../shared'
+import { AppContext } from "../../../shared";
+import { APPLICATION_ACTION } from "../../../../redux-store/actions";
 import { MainLayout } from "../../../../layout";
 
 // const reducerFunction = (state, action) => {
@@ -30,9 +31,9 @@ import { MainLayout } from "../../../../layout";
 // };
 
 const UseReducerExample = (props) => {
-//   const [input, setInput] = useState(0);
-//   const [state, dispatch] = useReducer(reducerFunction, initialState);
-const { input, setInput, state, dispatch } = useContext(AppContext);
+  //   const [input, setInput] = useState(0);
+  //   const [state, dispatch] = useReducer(reducerFunction, initialState);
+  const { input, setInput, state, dispatch } = useContext(AppContext);
 
   return (
     <>
@@ -42,7 +43,7 @@ const { input, setInput, state, dispatch } = useContext(AppContext);
           <Form inverted>
             <Form.Group>
               <Form.Field inline>
-                <label>First name</label>
+                <label>Enter Count</label>
                 <Input
                   type="text"
                   name="initialValue"
@@ -51,19 +52,26 @@ const { input, setInput, state, dispatch } = useContext(AppContext);
               </Form.Field>
               <Button
                 default
-                onClick={() => dispatch({ type: "initCount", payload: input })}
+                onClick={() => dispatch({ type: APPLICATION_ACTION.INIT_COUNT, payload: input })}
               >
                 Set Initial Count
+              </Button>
+              <Button
+                inverted
+                color="red"
+                onClick={() => dispatch({ type: APPLICATION_ACTION.RESET_COUNT })}
+              >
+                Rest Count
               </Button>
             </Form.Group>
             <Form.Field inline>
               <label>Current Count:</label>
               <p>{state.count}</p>
             </Form.Field>
-            <Button primary onClick={() => dispatch({ type: "increment" })}>
+            <Button primary onClick={() => dispatch({ type: APPLICATION_ACTION.INCREMENT })}>
               Increment
             </Button>
-            <Button secondary onClick={() => dispatch({ type: "decrement" })}>
+            <Button onClick={() => dispatch({ type: APPLICATION_ACTION.DECREMENT })}>
               Decrement
             </Button>
           </Form>
