@@ -1,0 +1,1 @@
+export { applicationReducerFunction } from './application-reducer';
